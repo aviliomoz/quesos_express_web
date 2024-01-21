@@ -2,8 +2,6 @@
 
 import { X } from "lucide-react";
 
-type Mode = "login" | "signup";
-
 type Props = {
   close: () => void;
   children: React.ReactNode;
