@@ -21,6 +21,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
     session && document.location.assign("/dashboard/restaurants");
   } catch (error) {
     if (error instanceof AuthError) toast.error(error.message);
+    if (error instanceof Error) toast.error(error.message);
   }
 };
 
@@ -47,6 +48,21 @@ export const signup = async (data: z.infer<typeof SignupSchema>) => {
 
       document.location.assign("/dashboard/restaurants");
     }
+  } catch (error) {
+    if (error instanceof AuthError) toast.error(error.message);
+    if (error instanceof Error) toast.error(error.message);
+  }
+};
+
+export const logout = async () => {
+  const supabase = createSupabaseBrowserClient();
+
+  try {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) throw new AuthError(error.message);
+
+    document.location.reload();
   } catch (error) {
     if (error instanceof AuthError) toast.error(error.message);
     if (error instanceof Error) toast.error(error.message);

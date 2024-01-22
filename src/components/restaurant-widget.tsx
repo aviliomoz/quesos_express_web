@@ -6,70 +6,63 @@ import {
   ChevronDown,
   Settings,
   Squircle,
+  Store,
   Users,
 } from "lucide-react";
-import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { WidgetLink } from "./widget-link";
 
-type Props = {
-  id: string;
-};
-
-export function RestaurantWidget({ id }: Props) {
+export function RestaurantWidget() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { restaurant_id } = useParams<{ restaurant_id: string }>();
   const [restaurant, setRestaurant] = useState<{ id: string; name: string }>();
 
   useEffect(() => {
-    getRestaurantById(id).then(setRestaurant);
-  }, []);
+    getRestaurantById(restaurant_id).then(setRestaurant);
+  }, [restaurant_id]);
 
-  if (!restaurant) return <></>;
+  if (!restaurant_id || !restaurant) return <></>;
 
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="border rounded-md px-3 py-1.5 mt-4 mb-4 text-sm w-full flex justify-between items-center relative"
+      className="border rounded-md px-3 py-1 mt-4 mb-4 text-sm w-full flex justify-between items-center relative shadow-sm min-w-max"
     >
       <div className="flex items-center gap-2">
-        <Squircle className="w-3 stroke-orange-500" />
+        <div className="w-6 h-6 flex justify-center items-center rounded-md bg-zinc-100">
+          <Store className="w-3 stroke-zinc-700" />
+        </div>
         <span>Mezqal</span>
       </div>
       <ChevronDown
-        className={`w-4 transition-all ease-in-out ${isOpen && "rotate-180"}`}
+        className={`w-4 ml-4 transition-all ease-in-out ${
+          isOpen && "rotate-180"
+        }`}
       />
-      {isOpen && (
-        <div className="absolute z-40 border rounded-md bg-white p-2 top-full mt-2 left-0 w-full flex min-w-max flex-col">
-          <WidgetLink href={`/dashboard/restaurants/${id}/settings/restaurant`}>
-            <Settings className="w-3" />
-            <span>Restaurant settings</span>
-          </WidgetLink>
-          <WidgetLink href={`/dashboard/restaurants/${id}/settings/team`}>
-            <Users className="w-3" />
-            <span>Team settings</span>
-          </WidgetLink>
-          <div className="border-b my-2"></div>
-          <WidgetLink href="/dashboard/restaurants">
-            <ArrowLeftRight className="w-3" />
-            <span>Change restaurant</span>
-          </WidgetLink>
-        </div>
-      )}
+      <div
+        className={`absolute z-40 border rounded-md bg-white p-2 top-full mt-2 right-0 w-full flex min-w-max flex-col transition-all -translate-y-2 opacity-0 invisible ease-in-out duration-300 ${
+          isOpen && "!visible !opacity-100 !translate-y-0"
+        }`}
+      >
+        <WidgetLink
+          href={`/dashboard/restaurants/${restaurant_id}/settings/restaurant`}
+        >
+          <Settings className="w-3" />
+          <span>Restaurant settings</span>
+        </WidgetLink>
+        <WidgetLink
+          href={`/dashboard/restaurants/${restaurant_id}/settings/team`}
+        >
+          <Users className="w-3" />
+          <span>Team settings</span>
+        </WidgetLink>
+        <div className="border-b my-2"></div>
+        <WidgetLink href="/dashboard/restaurants">
+          <ArrowLeftRight className="w-3" />
+          <span>Change restaurant</span>
+        </WidgetLink>
+      </div>
     </button>
-  );
-}
-
-type LinkProps = {
-  children: React.ReactNode;
-  href: string;
-};
-
-function WidgetLink({ href, children }: LinkProps) {
-  return (
-    <Link
-      href={href}
-      className="hover:bg-zinc-100 w-full text-start rounded-md px-3 py-1 flex items-center gap-2 min-w-max"
-    >
-      {children}
-    </Link>
   );
 }

@@ -9,6 +9,7 @@ import {
   Salad,
   Settings,
   Store,
+  Users,
 } from "lucide-react";
 
 type Path = {
@@ -33,11 +34,6 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
             url: `/dashboard/restaurants/${restaurant_id}/home`,
             icon: Store,
           },
-        ],
-      },
-      {
-        title: "ITEMS",
-        paths: [
           {
             name: "Supplies",
             url: `/dashboard/restaurants/${restaurant_id}/supplies`,
@@ -80,6 +76,21 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
           },
         ],
       },
+      {
+        title: "OPTIONS",
+        paths: [
+          {
+            name: "Team",
+            url: `/dashboard/restaurants/${restaurant_id}/settings/team`,
+            icon: Users,
+          },
+          {
+            name: "Settings",
+            url: `/dashboard/restaurants/${restaurant_id}/settings/restaurant`,
+            icon: Settings,
+          },
+        ],
+      },
     ];
 
   return [
@@ -87,6 +98,16 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
       title: "MENU",
       paths: [
         { name: "Restaurants", url: "/dashboard/restaurants", icon: Store },
+      ],
+    },
+    {
+      title: "OPTIONS",
+      paths: [
+        {
+          name: "Settings",
+          url: `/dashboard/settings/user`,
+          icon: Settings,
+        },
       ],
     },
   ];
