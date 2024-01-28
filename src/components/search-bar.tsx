@@ -23,7 +23,7 @@ export function SearchBar() {
       }
 
       router.replace(`${pathname}?${params}`);
-    }, 600);
+    }, 400);
 
     return () => {
       clearTimeout(updateSearch);

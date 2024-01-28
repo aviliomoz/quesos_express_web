@@ -42,7 +42,7 @@ export function NotificationsWidget() {
       <Bell className="w-4 stroke-zinc-700" />
       <Circle className="absolute -top-1 right-2 w-2 stroke-orange-500 fill-orange-500" />
       <div
-        className={`absolute top-full mt-2 right-0 p-4 border rounded-md bg-white min-w-max -translate-y-2 opacity-0 transition-all duration-300 ease-in-out invisible ${
+        className={`absolute top-full mt-2 right-0 p-4 border rounded-md bg-white min-w-max -translate-y-2 opacity-0 transition-all duration-200 ease-in-out invisible ${
           isOpen && "!visible !translate-y-0 opacity-100"
         }`}
       >

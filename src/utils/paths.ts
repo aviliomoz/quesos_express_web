@@ -4,6 +4,7 @@ import {
   BookMarked,
   Calculator,
   Carrot,
+  CreditCard,
   Grid2X2,
   LucideIcon,
   Salad,
@@ -81,8 +82,13 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
         paths: [
           {
             name: "Team",
-            url: `/dashboard/restaurants/${restaurant_id}/settings/team`,
+            url: `/dashboard/restaurants/${restaurant_id}/team`,
             icon: Users,
+          },
+          {
+            name: "Payments",
+            url: `/dashboard/restaurants/${restaurant_id}/payments`,
+            icon: CreditCard,
           },
           {
             name: "Settings",

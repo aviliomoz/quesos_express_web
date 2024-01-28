@@ -1,16 +1,9 @@
 "use client";
 
 import { getRestaurantById } from "@/functions/restaurants";
-import {
-  ArrowLeftRight,
-  ChevronDown,
-  Settings,
-  Squircle,
-  Store,
-  Users,
-} from "lucide-react";
+import { ArrowLeftRight, ChevronDown, Store } from "lucide-react";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { WidgetLink } from "./widget-link";
 
 export function RestaurantWidget() {
@@ -27,7 +20,7 @@ export function RestaurantWidget() {
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="border rounded-md px-3 py-1 mt-4 mb-4 text-sm w-full flex justify-between items-center relative shadow-sm min-w-max"
+      className="border rounded-md px-2 py-1 mt-4 mb-4 text-sm w-full flex justify-between items-center relative shadow-sm min-w-max"
     >
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 flex justify-center items-center rounded-md bg-zinc-100">
@@ -41,22 +34,11 @@ export function RestaurantWidget() {
         }`}
       />
       <div
-        className={`absolute z-40 border rounded-md bg-white p-2 top-full mt-2 right-0 w-full flex min-w-max flex-col transition-all -translate-y-2 opacity-0 invisible ease-in-out duration-300 ${
+        className={`absolute z-40 border rounded-md bg-white p-2 top-full mt-2 right-0 w-full flex min-w-max flex-col transition-all -translate-y-2 opacity-0 invisible ease-in-out duration-200 ${
           isOpen && "!visible !opacity-100 !translate-y-0"
         }`}
       >
-        <WidgetLink
-          href={`/dashboard/restaurants/${restaurant_id}/settings/restaurant`}
-        >
-          <Settings className="w-3" />
-          <span>Restaurant settings</span>
-        </WidgetLink>
-        <WidgetLink
-          href={`/dashboard/restaurants/${restaurant_id}/settings/team`}
-        >
-          <Users className="w-3" />
-          <span>Team settings</span>
-        </WidgetLink>
+        <div className="py-4">Info del plan</div>
         <div className="border-b my-2"></div>
         <WidgetLink href="/dashboard/restaurants">
           <ArrowLeftRight className="w-3" />

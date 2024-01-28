@@ -6,8 +6,10 @@ import { WidgetLink } from "./widget-link";
 import { logout } from "@/functions/auth";
 import { getUserProfile } from "@/functions/user";
 import { Tables } from "@/schemas/database";
+import { usePathname } from "next/navigation";
 
 export function UserWidget() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<Tables<"profiles"> | undefined>();
 
@@ -32,7 +34,7 @@ export function UserWidget() {
         }`}
       />
       <div
-        className={`absolute border rounded-md p-2 top-full mt-2 right-0 bg-white min-w-max transition-all ease-in-out invisible -translate-y-2 opacity-0 duration-300 ${
+        className={`absolute border rounded-md p-2 top-full mt-2 right-0 bg-white min-w-max transition-all ease-in-out invisible -translate-y-2 opacity-0 duration-200 ${
           isOpen && "!visible !translate-y-0 !opacity-100"
         }`}
       >
@@ -41,9 +43,10 @@ export function UserWidget() {
           <span>Account settings</span>
         </WidgetLink>
         <div className="border-b my-2"></div>
+
         <button
           onClick={logout}
-          className={`hover:bg-red-100 w-full rounded-md px-3 py-1 flex items-center gap-2 min-w-max`}
+          className={`hover:bg-orange-100 w-full rounded-md px-3 py-1 flex items-center gap-2 min-w-max`}
         >
           <LogOut className="w-3" />
           <span>Logout</span>

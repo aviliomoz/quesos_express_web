@@ -12,10 +12,13 @@ type Props = {
 export default function AppLayout({ children }: Props) {
   return (
     <>
-      <aside className="fixed top-0 left-0 w-60 border-r h-screen py-6 pl-8 pr-6">
-        <Logo />
-        <div className="border-b my-4"></div>
-        <Navigation />
+      <aside className="fixed top-0 left-0 w-60 border-r h-screen">
+        <div className="border-b h-16 px-6 flex items-center">
+          <Logo />
+        </div>
+        <div className="px-6 py-2">
+          <Navigation />
+        </div>
       </aside>
       <header className="fixed top-0 ml-60 w-[calc(100%-240px)] border-b h-16 flex items-center justify-between px-6">
         <SearchBar />
@@ -25,7 +28,7 @@ export default function AppLayout({ children }: Props) {
           <NotificationsWidget />
         </div>
       </header>
-      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-4">{children}</main>
+      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-6">{children}</main>
     </>
   );
 }
