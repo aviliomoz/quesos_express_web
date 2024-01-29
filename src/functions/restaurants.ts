@@ -1,8 +1,9 @@
+import { createSupabaseBrowserClient } from "@/libs/supabase/browser";
 import { createSupabaseServerClient } from "@/libs/supabase/server";
 import { AuthError } from "@supabase/supabase-js";
 import toast from "react-hot-toast";
 
-export const getRestaurants = async () => {
+export const getUserRestaurantIds = async () => {
   const supabase = createSupabaseServerClient();
 
   try {
@@ -14,7 +15,13 @@ export const getRestaurants = async () => {
     if (error) throw new AuthError(error.message);
 
     if (user) {
-      const { data: restaurants } = await supabase.from("restaurants").select();
+      const { data: restaurants, error } = await supabase
+        .from("teams")
+        .select()
+        .eq("user_id", user.id);
+
+      if (error) throw new Error(error.message);
+
       return restaurants || [];
     }
 
@@ -26,10 +33,19 @@ export const getRestaurants = async () => {
 };
 
 export const getRestaurantById = async (id: string) => {
-  const restaurant = {
-    id: "1",
-    name: "Mezqal",
-  };
+  const supabase = createSupabaseBrowserClient();
 
-  return restaurant;
+  try {
+    const { data: restaurant, error } = await supabase
+      .from("restaurants")
+      .select()
+      .eq("id", id)
+      .single();
+
+    if (error) throw new Error(error.message);
+
+    return restaurant;
+  } catch (error) {
+    if (error instanceof Error) toast.error(error.message);
+  }
 };

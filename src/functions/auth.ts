@@ -21,7 +21,6 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
     session && document.location.assign("/dashboard/restaurants");
   } catch (error) {
     if (error instanceof AuthError) toast.error(error.message);
-    if (error instanceof Error) toast.error(error.message);
   }
 };
 
@@ -50,7 +49,6 @@ export const signup = async (data: z.infer<typeof SignupSchema>) => {
     }
   } catch (error) {
     if (error instanceof AuthError) toast.error(error.message);
-    if (error instanceof Error) toast.error(error.message);
   }
 };
 
@@ -65,6 +63,5 @@ export const logout = async () => {
     document.location.reload();
   } catch (error) {
     if (error instanceof AuthError) toast.error(error.message);
-    if (error instanceof Error) toast.error(error.message);
   }
 };

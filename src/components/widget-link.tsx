@@ -1,17 +1,20 @@
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
   href: string;
-  children: React.ReactNode;
+  title: string;
+  icon: LucideIcon;
 };
 
-export function WidgetLink({ href, children }: Props) {
+export function WidgetLink(props: Props) {
   return (
     <Link
-      href={href}
+      href={props.href}
       className={`hover:bg-zinc-100 w-full rounded-md px-3 py-1 flex items-center gap-2 min-w-max`}
     >
-      {children}
+      <props.icon className="w-3" />
+      <span>{props.title}</span>
     </Link>
   );
 }

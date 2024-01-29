@@ -21,7 +21,7 @@ export const getUserProfile = async () => {
 
     if (error) throw new Error(error.message);
 
-    if (profile) return profile;
+    return profile;
   }
 
   try {
