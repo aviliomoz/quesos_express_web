@@ -1,3 +1,3 @@
 export default function TeamSettingsPage() {
-  return <h1>Team settings page</h1>;
+  return <h1>Team page</h1>;
 }

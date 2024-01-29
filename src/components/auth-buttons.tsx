@@ -53,7 +53,7 @@ export function AuthButtons() {
               setSignupModal(true);
             }}
           >
-            Don't have an account?{" "}
+            Don`&apos;`t have an account?{" "}
             <span className="text-orange-500 ml-2">Register</span>
           </button>
         </Modal>
