@@ -1,5 +1,5 @@
-import { getRestaurantById } from "@/functions/restaurants";
 import { createSupabaseServerClient } from "@/libs/supabase/server";
+import { RestaurantStoreProvider } from "@/providers/restaurant-store-provider";
 import { redirect } from "next/navigation";
 
 type Props = {
@@ -34,5 +34,5 @@ export default async function RestaurantLayout({
     if (error || !data) redirect("/dashboard/restaurants");
   }
 
-  return children;
+  return <RestaurantStoreProvider>{children}</RestaurantStoreProvider>;
 }

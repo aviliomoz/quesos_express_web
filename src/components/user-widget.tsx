@@ -3,17 +3,11 @@
 import { LogOut, Settings, User } from "lucide-react";
 import { WidgetLink } from "./widget-link";
 import { logout } from "@/functions/auth";
-import { getUserProfile } from "@/functions/user";
 import { Widget } from "./widget";
-import { useEffect, useState } from "react";
-import { Tables } from "@/schemas/database";
+import { useProfileStore } from "@/stores/profile-store";
 
 export function UserWidget() {
-  const [profile, setProfile] = useState<Tables<"profiles">>();
-
-  useEffect(() => {
-    getUserProfile().then(setProfile);
-  }, []);
+  const profile = useProfileStore((store) => store.profile);
 
   if (!profile) return <></>;
 

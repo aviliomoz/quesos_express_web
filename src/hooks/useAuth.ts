@@ -13,5 +13,5 @@ export function useAuth() {
       .finally(() => setLoading(false));
   }, []);
 
-  return { session, loading };
+  return { session, user: session?.user, loading };
 }
