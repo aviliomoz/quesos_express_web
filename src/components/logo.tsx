@@ -1,7 +1,5 @@
-"use client";
-
-import { useAuth } from "@/hooks/useAuth";
-import Link from "next/link";
+import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export function Logo() {
   const { session, loading } = useAuth();
@@ -12,7 +10,7 @@ export function Logo() {
     <div className="flex items-center gap-2">
       <div className="w-5 h-5 rounded-md border border-orange-200 bg-orange-500"></div>
       <Link
-        href={session ? "/dashboard/restaurants" : "/"}
+        to={session ? "/dashboard/restaurants" : "/"}
         className="text-lg font-bold"
       >
         Datagrill

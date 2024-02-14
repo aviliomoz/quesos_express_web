@@ -1,9 +1,7 @@
-"use client";
-
-import { useForm } from "@/hooks/useForm";
+import { useForm } from "../hooks/useForm";
 import { FormInput } from "./form-input";
-import { SignupSchema } from "@/schemas/auth";
-import { signup } from "@/functions/auth";
+import { SignupSchema } from "../schemas/auth";
+import { signup } from "../functions/auth";
 
 export function SignupForm() {
   const { data, handleChange, handleSubmit, validating } = useForm(

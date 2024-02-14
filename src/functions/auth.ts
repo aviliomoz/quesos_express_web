@@ -1,8 +1,7 @@
 import { z } from "zod";
-import { LoginSchema, SignupSchema } from "@/schemas/auth";
+import { LoginSchema, SignupSchema } from "../schemas/auth";
 import toast from "react-hot-toast";
-import { redirect } from "next/navigation";
-// import { cookies } from "next/headers";
+import { redirect } from "react-router-dom";
 
 export const login = async (data: z.infer<typeof LoginSchema>) => {
   const res = await fetch("http://localhost:5000/api/auth/login", {
@@ -19,7 +18,6 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
   const session = await res.json();
 
   if (session) {
-    // cookies().set("session", session.token);
     redirect("/dashboard/restaurants");
   }
 };

@@ -1,10 +1,8 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Modal } from "./modal";
 import { LoginForm } from "./login-form";
 import { SignupForm } from "./signup-form";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
 
 export function AuthButtons() {
@@ -20,7 +18,7 @@ export function AuthButtons() {
         {session ? (
           <>
             <Link
-              href={"/dashboard"}
+              to={"/dashboard"}
               className="bg-orange-500 text-white border border-orange-200 rounded-md px-4 py-1.5 text-sm font-medium hover:bg-orange-400"
             >
               Dashboard
