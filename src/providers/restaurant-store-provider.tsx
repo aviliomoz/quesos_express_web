@@ -13,12 +13,5 @@ export const RestaurantStoreProvider = ({ children }: Props) => {
   const { restaurant_id } = useParams<{ restaurant_id: string }>();
   const { setRestaurant } = useRestaurantStore();
 
-  useEffect(() => {
-    if (restaurant_id) {
-      getRestaurantById(restaurant_id).then((id) => id && setRestaurant(id));
-      // inicializar los demas stores
-    }
-  }, [restaurant_id]);
-
   return children;
 };

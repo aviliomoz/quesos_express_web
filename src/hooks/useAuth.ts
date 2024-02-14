@@ -1,17 +1,8 @@
-import { createSupabaseBrowserClient } from "@/libs/supabase/browser";
 import { useEffect, useState } from "react";
-import type { Session } from "@supabase/supabase-js";
 
 export function useAuth() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [session, setSession] = useState<null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    createSupabaseBrowserClient()
-      .auth.getSession()
-      .then(({ data: { session } }) => setSession(session))
-      .finally(() => setLoading(false));
-  }, []);
-
-  return { session, user: session?.user, loading };
+  return { session, loading };
 }

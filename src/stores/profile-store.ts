@@ -1,10 +1,9 @@
-import { Tables } from "@/schemas/database";
 import { create } from "zustand";
 
 type ProfileStore = {
-  profile: Tables<"profiles"> | undefined;
+  profile: any;
 
-  setProfile: (profile: Tables<"profiles">) => void;
+  setProfile: (profile: any) => void;
   clearProfile: () => void;
 };
 

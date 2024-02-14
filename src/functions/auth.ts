@@ -1,67 +1,45 @@
 import { z } from "zod";
 import { LoginSchema, SignupSchema } from "@/schemas/auth";
-import { createSupabaseBrowserClient } from "@/libs/supabase/browser";
-import { AuthError } from "@supabase/supabase-js";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
 
 export const login = async (data: z.infer<typeof LoginSchema>) => {
-  const supabase = createSupabaseBrowserClient();
-
-  try {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signInWithPassword({
+  const res = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       email: data.email,
       password: data.password,
-    });
+    }),
+  });
 
-    if (error) throw new AuthError(error.message);
+  const session = await res.json();
 
-    session && document.location.assign("/dashboard/restaurants");
-  } catch (error) {
-    if (error instanceof AuthError) toast.error(error.message);
+  if (session) {
+    // cookies().set("session", session.token);
+    redirect("/dashboard/restaurants");
   }
 };
 
-export const signup = async (data: z.infer<typeof SignupSchema>) => {
-  const supabase = createSupabaseBrowserClient();
+export const signup = async (data: z.infer<typeof SignupSchema>) => {};
 
-  try {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: data.email,
-      password: data.password,
-    });
+export const logout = async () => {};
 
-    if (error) throw new AuthError(error.message);
+export const refreshToken = async (token: string): Promise<string> => {
+  const res = await fetch("http://localhost:5000/api/auth/refresh", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+    }),
+  });
 
-    if (session) {
-      const { error } = await supabase
-        .from("profiles")
-        .insert({ id: session.user.id, name: data.name, language: "en" });
+  const data = await res.json();
 
-      if (error) throw new Error(error.message);
-
-      document.location.assign("/dashboard/restaurants");
-    }
-  } catch (error) {
-    if (error instanceof AuthError) toast.error(error.message);
-  }
-};
-
-export const logout = async () => {
-  const supabase = createSupabaseBrowserClient();
-
-  try {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) throw new AuthError(error.message);
-
-    document.location.reload();
-  } catch (error) {
-    if (error instanceof AuthError) toast.error(error.message);
-  }
+  return data.token;
 };

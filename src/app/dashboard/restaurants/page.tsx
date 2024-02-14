@@ -20,11 +20,11 @@ export default async function RestaurantsPage() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-6">
-        {restaurants?.map((restaurant) => {
+        {/* {[].map((restaurant) => {
           return (
             <RestaurantCard key={restaurant.id} id={restaurant.restaurant_id} />
           );
-        })}
+        })} */}
       </div>
     </>
   );

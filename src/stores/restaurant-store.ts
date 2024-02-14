@@ -1,10 +1,9 @@
-import { Tables } from "@/schemas/database";
 import { create } from "zustand";
 
 type RestaurantStore = {
-  restaurant: Tables<"restaurants"> | undefined;
+  restaurant: any;
 
-  setRestaurant: (restaurant: Tables<"restaurants">) => void;
+  setRestaurant: (restaurant: any) => void;
   clearRestaurant: () => void;
 };
 

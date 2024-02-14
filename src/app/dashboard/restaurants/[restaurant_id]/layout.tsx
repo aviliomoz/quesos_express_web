@@ -1,4 +1,3 @@
-import { createSupabaseServerClient } from "@/libs/supabase/server";
 import { RestaurantStoreProvider } from "@/providers/restaurant-store-provider";
 import { redirect } from "next/navigation";
 
@@ -14,25 +13,6 @@ export default async function RestaurantLayout({
   params: { restaurant_id },
 }: Props) {
   // Aqui va la validacion de si el restaurante existe y si el usuario es miembro
-  const supabase = createSupabaseServerClient();
-
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-
-  if (error || !user) redirect("/dashboard/restaurants");
-
-  if (user) {
-    const { data, error } = await supabase
-      .from("teams")
-      .select()
-      .eq("user_id", user.id)
-      .eq("restaurant_id", restaurant_id)
-      .single();
-
-    if (error || !data) redirect("/dashboard/restaurants");
-  }
 
   return <RestaurantStoreProvider>{children}</RestaurantStoreProvider>;
 }
