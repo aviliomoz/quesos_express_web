@@ -1,13 +1,11 @@
-"use client";
-
 import { LogOut, Settings, User } from "lucide-react";
 import { WidgetLink } from "./widget-link";
-import { logout } from "@/functions/auth";
+import { logout } from "../functions/auth";
 import { Widget } from "./widget";
-import { useProfileStore } from "@/stores/profile-store";
+import { useState } from "react";
 
 export function UserWidget() {
-  const profile = useProfileStore((store) => store.profile);
+  const [profile] = useState({ name: "Avilio Muñoz" });
 
   if (!profile) return <></>;
 

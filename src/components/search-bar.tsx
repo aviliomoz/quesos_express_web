@@ -1,28 +1,24 @@
-"use client";
-
 import { Search } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export function SearchBar() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
 
   const [search, setSearch] = useState<string>(
-    searchParams.get("search") || ""
+    searchParams[0].get("search") || ""
   );
 
   useEffect(() => {
     const updateSearch = setTimeout(() => {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(searchParams[0]);
       if (search.length > 0) {
         params.set("search", search);
       } else {
         params.delete("search");
       }
 
-      router.replace(`${pathname}?${params}`);
+      searchParams[1]();
     }, 400);
 
     return () => {

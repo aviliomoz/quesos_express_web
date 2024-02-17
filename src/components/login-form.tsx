@@ -2,18 +2,21 @@ import { useForm } from "../hooks/useForm";
 import { FormInput } from "./form-input";
 import { LoginSchema } from "../schemas/auth";
 import { login } from "../functions/auth";
+import { FormEvent } from "react";
 
 export function LoginForm() {
-  const { data, handleChange, handleSubmit, validating } = useForm(
+  const { data, handleChange, validating, validate } = useForm(
     { email: "", password: "" },
     LoginSchema
   );
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    validate() && (await login(data));
+  };
+
   return (
-    <form
-      onSubmit={(e) => handleSubmit(e, login)}
-      className="flex flex-col gap-2"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
       <h3 className="font-semibold text-lg mb-4">Login</h3>
       <FormInput
         value={data.email}

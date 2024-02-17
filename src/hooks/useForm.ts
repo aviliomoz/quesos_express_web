@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ZodError, ZodSchema } from "zod";
 import { toast } from "react-hot-toast";
 
@@ -20,20 +20,9 @@ export function useForm<TData extends Record<string, string>>(
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (
-    e: FormEvent<HTMLFormElement>,
-    submit: (vdata: typeof data) => Promise<void>
-  ) => {
-    e.preventDefault();
-    const vdata = validate();
-
-    if (vdata) {
-      setValidating(true);
-      submit(vdata).finally(() => setValidating(false));
-    }
-  };
-
   const validate = (): typeof initialData | undefined => {
+    setValidating(true);
+
     try {
       return schema.parse(data);
     } catch (error) {
@@ -44,8 +33,10 @@ export function useForm<TData extends Record<string, string>>(
           })
         );
       }
+    } finally {
+      setValidating(false);
     }
   };
 
-  return { data, handleChange, handleSubmit, validating };
+  return { data, handleChange, validate, validating };
 }

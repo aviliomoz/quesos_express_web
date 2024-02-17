@@ -18,7 +18,7 @@ export function AuthButtons() {
         {session ? (
           <>
             <Link
-              to={"/dashboard"}
+              to={"/home"}
               className="bg-orange-500 text-white border border-orange-200 rounded-md px-4 py-1.5 text-sm font-medium hover:bg-orange-400"
             >
               Dashboard

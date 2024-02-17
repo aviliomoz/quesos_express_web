@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDown, Circle, LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -14,8 +12,17 @@ export function Widget(props: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const clickEvent = (event: MouseEvent) => setIsOpen(false);
-    isOpen && document.addEventListener("click", clickEvent);
+    const clickEvent = (event: MouseEvent) => {
+      setIsOpen(false);
+    };
+
+    if (isOpen) {
+      setTimeout(() => {
+        document.addEventListener("click", clickEvent);
+      }, 500);
+    } else {
+      document.removeEventListener("click", clickEvent);
+    }
 
     return () => {
       document.removeEventListener("click", clickEvent);

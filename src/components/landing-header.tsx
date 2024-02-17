@@ -5,7 +5,7 @@ export const LandingHeader = () => {
   return (
     <header className="h-16 flex items-center justify-between px-32 border-b relative">
       <Logo />
-      {/* <AuthButtons /> */}
+      <AuthButtons />
     </header>
   );
 }

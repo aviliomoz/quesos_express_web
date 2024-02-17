@@ -1,13 +1,10 @@
-"use client";
-
-import Link from "next/link";
-import { type PathGroup, getPaths } from "@/utils/paths";
-import { useParams, usePathname } from "next/navigation";
+import { Link, useParams, useLocation } from "react-router-dom";
+import { type PathGroup, getPaths } from "../utils/paths";
 import { useEffect, useState } from "react";
 
 export function Navigation() {
-  const pathname = usePathname();
-  const { restaurant_id } = useParams<{ restaurant_id: string }>();
+  const { pathname } = useLocation();
+  const { restaurant_id } = useParams();
   const [paths, setPaths] = useState<PathGroup[]>([]);
 
   useEffect(() => {
@@ -28,7 +25,7 @@ export function Navigation() {
               return (
                 <Link
                   key={path.name}
-                  href={path.url}
+                  to={path.url}
                   className={`flex items-center gap-2 rounded-md px-3 py-1 text-sm mb-1 ${
                     active
                       ? "bg-orange-500 text-white"

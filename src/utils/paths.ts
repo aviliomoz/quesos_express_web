@@ -32,27 +32,27 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
         paths: [
           {
             name: "Home",
-            url: `/dashboard/restaurants/${restaurant_id}/home`,
+            url: `/restaurants/${restaurant_id}`,
             icon: Store,
           },
           {
             name: "Supplies",
-            url: `/dashboard/restaurants/${restaurant_id}/supplies`,
+            url: `/restaurants/${restaurant_id}/supplies`,
             icon: Carrot,
           },
           {
             name: "Products",
-            url: `/dashboard/restaurants/${restaurant_id}/products`,
+            url: `/restaurants/${restaurant_id}/products`,
             icon: Salad,
           },
           {
             name: "Subproducts",
-            url: `/dashboard/restaurants/${restaurant_id}/subproducts`,
+            url: `/restaurants/${restaurant_id}/subproducts`,
             icon: Blocks,
           },
           {
             name: "Combos",
-            url: `/dashboard/restaurants/${restaurant_id}/combos`,
+            url: `/restaurants/${restaurant_id}/combos`,
             icon: Blend,
           },
         ],
@@ -62,17 +62,17 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
         paths: [
           {
             name: "Matrix",
-            url: `/dashboard/restaurants/${restaurant_id}/tools/matrix`,
+            url: `/restaurants/${restaurant_id}/tools/matrix`,
             icon: Grid2X2,
           },
           {
             name: "Calculator",
-            url: `/dashboard/restaurants/${restaurant_id}/tools/calculator`,
+            url: `/restaurants/${restaurant_id}/tools/calculator`,
             icon: Calculator,
           },
           {
             name: "Recipe book",
-            url: `/dashboard/restaurants/${restaurant_id}/tools/recipe-book`,
+            url: `/restaurants/${restaurant_id}/tools/recipe-book`,
             icon: BookMarked,
           },
         ],
@@ -82,17 +82,17 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
         paths: [
           {
             name: "Team",
-            url: `/dashboard/restaurants/${restaurant_id}/team`,
+            url: `/restaurants/${restaurant_id}/team`,
             icon: Users,
           },
           {
             name: "Payments",
-            url: `/dashboard/restaurants/${restaurant_id}/payments`,
+            url: `/restaurants/${restaurant_id}/payments`,
             icon: CreditCard,
           },
           {
             name: "Settings",
-            url: `/dashboard/restaurants/${restaurant_id}/settings/restaurant`,
+            url: `/restaurants/${restaurant_id}/settings/restaurant`,
             icon: Settings,
           },
         ],
@@ -103,7 +103,7 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
     {
       title: "MENU",
       paths: [
-        { name: "Restaurants", url: "/dashboard/restaurants", icon: Store },
+        { name: "Restaurants", url: "/home", icon: Store },
       ],
     },
     {
@@ -111,7 +111,7 @@ export const getPaths = (restaurant_id?: string): PathGroup[] => {
       paths: [
         {
           name: "Settings",
-          url: `/dashboard/settings/user`,
+          url: `/settings/user`,
           icon: Settings,
         },
       ],

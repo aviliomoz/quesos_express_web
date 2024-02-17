@@ -1,14 +1,12 @@
-"use client";
-
 import { ArrowLeftRight, Store } from "lucide-react";
 import { WidgetLink } from "./widget-link";
 import { Widget } from "./widget";
-import { useRestaurantStore } from "@/stores/restaurant-store";
-import { useParams } from "next/navigation";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export function RestaurantWidget() {
   const { restaurant_id } = useParams();
-  const { restaurant } = useRestaurantStore();
+  const [restaurant] = useState({ name: "Ohanna" });
 
   if (!restaurant_id || !restaurant) return <></>;
 

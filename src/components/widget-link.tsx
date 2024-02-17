@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 type Props = {
   href: string;
@@ -10,7 +10,7 @@ type Props = {
 export function WidgetLink(props: Props) {
   return (
     <Link
-      href={props.href}
+      to={props.href}
       className={`hover:bg-zinc-100 w-full rounded-md px-3 py-1 flex items-center gap-2 min-w-max`}
     >
       <props.icon className="w-3" />
