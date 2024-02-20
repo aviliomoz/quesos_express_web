@@ -3,26 +3,26 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export function SearchBar() {
-  const searchParams = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState<string>("");
 
-  const [search, setSearch] = useState<string>(
-    searchParams[0].get("search") || ""
-  );
+  const updateSearch = (text: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (search.trim() !== "") {
+      params.set("search", text);
+    } else {
+      params.delete("search");
+    }
+
+    setSearchParams(params);
+  };
 
   useEffect(() => {
-    const updateSearch = setTimeout(() => {
-      const params = new URLSearchParams(searchParams[0]);
-      if (search.length > 0) {
-        params.set("search", search);
-      } else {
-        params.delete("search");
-      }
-
-      searchParams[1]();
-    }, 400);
+    const update = setTimeout(() => updateSearch(search), 400);
 
     return () => {
-      clearTimeout(updateSearch);
+      clearTimeout(update);
     };
   }, [search]);
 

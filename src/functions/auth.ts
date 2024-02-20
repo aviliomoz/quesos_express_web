@@ -19,7 +19,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
   if (!session.token) return toast.error("Credenciales incorrectas");
 
   localStorage.setItem("session", session.token);
-  document.location.assign("/dashboard/restaurants");
+  document.location.assign("/home");
 };
 
 export const signup = async (data: z.infer<typeof SignupSchema>) => {};
@@ -31,10 +31,8 @@ export const refreshToken = async (token: string): Promise<string> => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: token,
     },
-    body: JSON.stringify({
-      token,
-    }),
   });
 
   const data = await res.json();

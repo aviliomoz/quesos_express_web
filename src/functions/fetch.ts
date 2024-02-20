@@ -1,15 +1,24 @@
 import toast from "react-hot-toast";
+import { refreshToken } from "./auth";
 
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-export const fetchWithToken = (
+type FetchOptions = {
+  method: Method;
+  body?: Record<string, any>;
+};
+
+export const fetchWithToken = async (
   url: string,
-  method: Method = "GET",
-  body?: Record<string, any>
+  { method = "GET", body }: FetchOptions
 ) => {
   try {
     const token = localStorage.getItem("session");
-    if (!token) throw new Error("Unauthorized");
+    if (!token) throw new Error("Unauthorized 1");
+
+    // const refreshedToken = await refreshToken(token);
+
+    // if (!refreshedToken) throw new Error("Unauthorized 2");
 
     if (!body) {
       return fetch(url, {
@@ -29,5 +38,6 @@ export const fetchWithToken = (
     });
   } catch (error) {
     error instanceof Error && toast.error(error.message);
+    return null;
   }
 };
