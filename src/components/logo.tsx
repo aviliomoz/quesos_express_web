@@ -9,7 +9,7 @@ export function Logo() {
     <div className="flex items-center gap-2 w-full">
       <img src={logo} width={23} height={23} />
       <Link to={user ? "/home" : "/"} className="text-lg font-bold">
-        Datagrill
+        Quesos Express
       </Link>
     </div>
   );
