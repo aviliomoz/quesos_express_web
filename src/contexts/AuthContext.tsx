@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { axiosAPI } from "../libs/axios";
 import { handleErrorMessage } from "../utils/errors";
+import { User, AuthResponseType } from "../types";
 
 type AuthContextType = {
   user: User | undefined;

@@ -1,15 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage";
+import { LoginPage } from "./pages/LoginPage";
 import { AppLayout } from "./layouts/AppLayout";
-import { HomePage } from "./pages/HomePage";
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route element={<AppLayout />}>
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/products" element={<></>} />
+          <Route path="/customers" element={<></>} />
+          <Route path="/sales" element={<></>} />
+          <Route path="/purchases" element={<></>} />
+          <Route path="/inventory" element={<></>} />
         </Route>
       </Routes>
     </BrowserRouter>

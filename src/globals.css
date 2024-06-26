@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Inter";
+}
+
+@layer components {
+  .bg-dark-gradient {
+    @apply bg-gradient-to-br from-gray-900 to-gray-800 hover:bg-gradient-to-br hover:from-gray-800 hover:to-gray-700 hover:border-gray-700 border-gray-800 border;
+  }
+}

@@ -4,6 +4,8 @@ import { LoginSchema } from "../../schemas/auth";
 import { FormEvent, useState } from "react";
 import { axiosAPI } from "../../libs/axios";
 import { handleErrorMessage } from "../../utils/errors";
+import { Logo } from "../Logo";
+import { AuthResponseType } from "../../types";
 
 const initialFormData = {
   email: "",
@@ -28,7 +30,7 @@ export function LoginForm() {
     try {
       await axiosAPI.post<AuthResponseType>("/auth/login", validatedData);
 
-      window.location.assign("/home");
+      location.assign("/products");
     } catch (error) {
       return handleErrorMessage(error);
     } finally {
@@ -37,8 +39,12 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <h3 className="font-semibold text-lg mb-4 text-center">Iniciar sesión</h3>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2 bg-white p-10 rounded-md shadow-sm w-10/12 max-w-80"
+    >
+      <Logo />
+      <h3 className="mt-4 mb-6 text-center">Inicia sesión para entrar</h3>
       <FormInput
         value={data.email}
         type="email"
@@ -54,7 +60,7 @@ export function LoginForm() {
         name="password"
       />
       <button
-        className="bg-orange-500 hover:bg-orange-400 rounded-md border border-orange-200 text-white py-1.5 text-sm mt-4 font-medium"
+        className="bg-dark-gradient rounded-md text-white py-1.5 text-sm mt-4 font-medium"
         type="submit"
       >
         {loading ? "Validando..." : "Entrar"}

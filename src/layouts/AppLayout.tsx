@@ -1,31 +1,40 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { Logo } from "../components/Logo";
+import { Navigation } from "../components/Navigation";
+import { LogoutButton } from "../components/auth/LogoutButton";
+import { Loading } from "../components/Loading";
+import { UserWidget } from "../components/auth/UserWidget";
+import { PageTitle } from "../components/PageTitle";
 
 export const AppLayout = () => {
   const { user, validating } = useAuth();
 
-  if (validating) return <>Iniciando la app...</>; // Agregar un loading
+  if (validating)
+    return (
+      <main className="w-full h-screen flex justify-center items-center">
+        <Loading />
+      </main>
+    );
+
   if (!user) return <Navigate to={"/"} />;
 
   return (
     <>
-      <aside className="fixed top-0 left-0 w-60 border-r h-screen">
-        <div className="border-b h-16 px-6 flex items-center">
+      <aside className="fixed top-0 left-0 w-60 border-r h-screen py-4 flex flex-col justify-between px-6">
+        <div>
           <Logo />
+          <Navigation />
         </div>
-        <div className="px-6 py-2">{/* <Navigation /> */}</div>
+        <LogoutButton />
       </aside>
       <header className="fixed top-0 ml-60 w-[calc(100%-240px)] border-b h-16 flex items-center justify-between px-6">
-        {/* <SearchBar /> */}
-        <div className="flex items-center gap-4">
-          {/* <RestaurantWidget />
-          <UserWidget />
-          <NotificationsWidget /> */}
-        </div>
+        <PageTitle />
+        <UserWidget />
       </header>
-      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-6">
+      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-6 relative">
         <Outlet />
+        <div className="fixed top-16 right-0 w-80 border-l h-[calc(100vh-64px)] p-6"></div>
       </main>
     </>
   );

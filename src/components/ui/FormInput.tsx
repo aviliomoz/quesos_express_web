@@ -23,7 +23,7 @@ export function FormInput({
 }: Props) {
   return (
     <label className="flex flex-col gap-1 mb-1 text-sm">
-      <p className="font-medium">{label}:</p>
+      <p className="">{label}:</p>
       <input
         className="border rounded-md px-3 py-1 outline-none w-full text-base"
         name={name}
