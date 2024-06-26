@@ -32,10 +32,10 @@ export const AppLayout = () => {
         <PageTitle />
         <UserWidget />
       </header>
-      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-6 relative">
+      <main className="ml-60 mt-16 w-[calc(100%-240px-320px)] p-6">
         <Outlet />
-        <div className="fixed top-16 right-0 w-80 border-l h-[calc(100vh-64px)] p-6"></div>
       </main>
+      <div className="fixed top-16 right-0 w-80 border-l h-[calc(100vh-64px)] p-6"></div>
     </>
   );
 };
