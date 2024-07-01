@@ -14,6 +14,7 @@ export const AppRouter = () => {
           <Route path="/customers" element={<></>} />
           <Route path="/sales" element={<></>} />
           <Route path="/purchases" element={<></>} />
+          <Route path="/suppliers" element={<></>} />
           <Route path="/inventory" element={<></>} />
         </Route>
       </Routes>
