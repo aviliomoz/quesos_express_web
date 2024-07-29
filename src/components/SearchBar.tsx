@@ -7,7 +7,9 @@ type Props = {
 
 export const SearchBar = ({ placeholder }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(
+    searchParams.get("search") || ""
+  );
 
   const updateSearchParams = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -18,11 +20,13 @@ export const SearchBar = ({ placeholder }: Props) => {
       params.delete("search");
     }
 
+    params.delete("page");
+
     setSearchParams(params);
   };
 
   useEffect(() => {
-    const timeout = setTimeout(() => updateSearchParams(search), 600);
+    const timeout = setTimeout(() => updateSearchParams(search), 400);
     return () => clearTimeout(timeout);
   }, [search]);
 
@@ -32,6 +36,7 @@ export const SearchBar = ({ placeholder }: Props) => {
       type="text"
       placeholder={placeholder}
       onChange={(e) => setSearch(e.target.value)}
+      value={search}
     />
   );
 };

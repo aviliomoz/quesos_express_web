@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const handleErrorMessage = (error: unknown) => {
   if (error instanceof AxiosError) {
-    const message: string = error.response?.data.error;
+    const message: string = error.response?.data.error.details;
     return toast.error(message);
   } else if (error instanceof Error) {
     return toast.error(error.message);

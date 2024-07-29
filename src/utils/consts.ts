@@ -1,4 +1,10 @@
-import { BookUser, Box, ShoppingBag, Truck, Wallet, Warehouse } from "lucide-react";
+import {
+  BookUser,
+  Box,
+  ShoppingBag,
+  Truck,
+  Wallet,
+} from "lucide-react";
 import { NavigationPath } from "../types";
 
 export const paths: NavigationPath[] = [
@@ -6,11 +12,6 @@ export const paths: NavigationPath[] = [
     url: "/products",
     text: "Productos",
     icon: Box,
-  },
-  {
-    url: "/customers",
-    text: "Clientes",
-    icon: BookUser,
   },
   {
     url: "/sales",
@@ -23,13 +24,13 @@ export const paths: NavigationPath[] = [
     icon: ShoppingBag,
   },
   {
+    url: "/customers",
+    text: "Clientes",
+    icon: BookUser,
+  },
+  {
     url: "/suppliers",
     text: "Proveedores",
     icon: Truck,
-  },
-  {
-    url: "/inventory",
-    text: "Inventario",
-    icon: Warehouse,
   },
 ];

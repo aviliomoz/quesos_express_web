@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { axiosAPI } from "../libs/axios";
+import { User, APIResponse } from "../types";
 import { handleErrorMessage } from "../utils/errors";
-import { User, AuthResponseType } from "../types";
 
 type AuthContextType = {
-  user: User | undefined;
-  setUser: (user: User | undefined) => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
   validating: boolean;
 };
 
@@ -18,16 +18,20 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthContextProvider = ({ children }: AuthContextProps) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User | null>(null);
   const [validating, setValidating] = useState<boolean>(true);
 
   useEffect(() => {
     const checkAuth = async () => {
+      setValidating(true);
+
       try {
-        const { data } = await axiosAPI.get<AuthResponseType>("/auth/check");
-        setUser(data.user);
+        const {
+          data: { data },
+        } = await axiosAPI.get<APIResponse<User | null>>("/auth/check");
+        setUser(data);
       } catch (error) {
-        return handleErrorMessage(error);
+        if (location.pathname !== "/") handleErrorMessage(error);
       } finally {
         setValidating(false);
       }

@@ -1,5 +1,27 @@
+import { FilterSelect } from "./ui/FilterSelect";
 import { FilterWidget } from "./ui/FilterWidget";
 
 export const ProductFilters = () => {
-  return <FilterWidget>Aquí van los filtros</FilterWidget>;
+  return (
+    <FilterWidget>
+      <FilterSelect
+        label="Estado"
+        name="status"
+        options={[
+          {
+            value: "all",
+            text: "Todos",
+          },
+          {
+            value: "active",
+            text: "Activos",
+          },
+          {
+            value: "inactive",
+            text: "Inactivos",
+          },
+        ]}
+      />
+    </FilterWidget>
+  );
 };

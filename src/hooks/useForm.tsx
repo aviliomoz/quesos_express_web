@@ -26,5 +26,5 @@ export function useForm<TData>(initialData: TData, schema: ZodSchema) {
     }
   };
 
-  return { data, handleChange, validateForm };
+  return { data, setData, handleChange, validateForm };
 }

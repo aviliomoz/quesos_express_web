@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import { axiosAPI } from "../../libs/axios";
 import { handleErrorMessage } from "../../utils/errors";
 import { Logo } from "../Logo";
-import { AuthResponseType } from "../../types";
+import { APIResponse, User } from "../../types";
 
 const initialFormData = {
   email: "",
@@ -28,7 +28,7 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      await axiosAPI.post<AuthResponseType>("/auth/login", validatedData);
+      await axiosAPI.post<APIResponse<User>>("/auth/login", validatedData);
 
       location.assign("/products");
     } catch (error) {

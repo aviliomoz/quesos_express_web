@@ -1,20 +1,20 @@
 import { ProductFilters } from "../components/ProductFilters";
-import { ProductsTable } from "../components/ProductsTable";
+import { SalesTable } from "../components/SalesTable";
 import { SearchBar } from "../components/SearchBar";
 import { GradientLink } from "../components/ui/GradientLink";
 import { Plus } from "lucide-react";
 
-export const ProductsPage = () => {
+export const SalesPage = () => {
   return (
     <>
       <div className="flex items-center justify-between mb-6">
-        <SearchBar placeholder="Buscar producto..." />
+        <SearchBar placeholder="Buscar cliente..." />
         <div className="flex items-center gap-4">
           <ProductFilters />
-          <GradientLink text="Nuevo producto" icon={Plus} url="/products/new" />
+          <GradientLink text="Nueva venta" icon={Plus} url="/sales/new" />
         </div>
       </div>
-      <ProductsTable />
+      <SalesTable />
     </>
   );
 };

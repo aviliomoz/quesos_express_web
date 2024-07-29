@@ -4,7 +4,7 @@ type Props = {
   type: "text" | "number" | "email" | "password";
   label: string;
   change: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value: string | number;
   name: string;
   min?: number;
   max?: number;
