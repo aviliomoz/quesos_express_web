@@ -9,6 +9,7 @@ import { SuppliersPage } from "./pages/SuppliersPage";
 import { SalesPage } from "./pages/SalesPage";
 import { ProductPage } from "./pages/ProductPage";
 import { KardexPage } from "./pages/KardexPage";
+import { MovementPage } from "./pages/MovementPage";
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
             <Route path="/products/new" element={<ProductPage />} />
             <Route path="/products/:id" element={<ProductPage />} />
             <Route path="/products/kardex/:id" element={<KardexPage />} />
-            <Route path="/products/movements/new" element={<></>} />
-            <Route path="/products/movements/:id" element={<></>} />
+            <Route path="/products/movements/new" element={<MovementPage />} />
+            <Route path="/products/movements/:id" element={<MovementPage />} />
             <Route path="/customers" element={<CustomersPage />} />
             <Route path="/customers/new" element={<></>} />
             <Route path="/customers/:id" element={<></>} />

@@ -73,11 +73,19 @@ export type Purchase = {
   status: Status;
 };
 
+export type MovementDetail = {
+  id: string;
+  product_id: string;
+  movement_id: string;
+  amount: number;
+};
+
 export type Movement = {
   id: string;
+  type: "entry" | "output";
   date: Date;
-  product: string;
-  concept: "entry" | "output" | "sale" | "purchase";
   description: string;
-  amount: number;
+  user_id: string;
+  status: Status;
+  details: MovementDetail[];
 };
