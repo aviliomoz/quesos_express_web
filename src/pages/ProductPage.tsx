@@ -1,6 +1,6 @@
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { ProductForm } from "../components/ProductForm";
+import { GoBackButton } from "../components/ui/GoBackButton";
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -11,10 +11,7 @@ export const ProductPage = () => {
         <h3 className="font-semibold">
           {id ? "Detalles del producto" : "Crear nuevo producto"}
         </h3>
-        <Link to={"/products"} className="flex items-center gap-2 text-sm">
-          <ArrowLeft className="w-4" />
-          Volver
-        </Link>
+        <GoBackButton />
       </div>
       <ProductForm />
     </>

@@ -29,8 +29,9 @@ export type Product = {
   id: string;
   name: string;
   price: number;
-  initial_stock: number;
+  initialStock: number;
   status: Status;
+  stock?: number
 };
 
 export type Customer = {
@@ -75,8 +76,8 @@ export type Purchase = {
 
 export type MovementDetail = {
   id: string;
-  product_id: string;
-  movement_id: string;
+  productId: string;
+  movementId: string;
   amount: number;
 };
 
@@ -85,7 +86,6 @@ export type Movement = {
   type: "entry" | "output";
   date: Date;
   description: string;
-  user_id: string;
+  userId: string;
   status: Status;
-  details: MovementDetail[];
 };

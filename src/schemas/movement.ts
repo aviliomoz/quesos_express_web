@@ -9,7 +9,6 @@ export const movementSchema = z.object({
   type: z.enum(["entry", "output"]),
   date: z.date(),
   description: z.string().min(1, "Descripción requerida"),
-  user_id: z.string().uuid(),
+  userId: z.string().uuid(),
   status: z.string().default("active"),
-  details: z.array(movementDetailSchema).default([]),
 });

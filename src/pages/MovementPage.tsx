@@ -1,6 +1,6 @@
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { MovementForm } from "../components/MovementForm";
+import { GoBackButton } from "../components/ui/GoBackButton";
 
 export const MovementPage = () => {
   const { id } = useParams();
@@ -11,10 +11,7 @@ export const MovementPage = () => {
         <h3 className="font-semibold">
           {id ? "Detalles del movimiento" : "Crear nuevo movimiento"}
         </h3>
-        <Link to={"/products"} className="flex items-center gap-2 text-sm">
-          <ArrowLeft className="w-4" />
-          Volver
-        </Link>
+        <GoBackButton />
       </div>
       <MovementForm />
     </>

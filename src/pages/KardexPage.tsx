@@ -16,7 +16,15 @@ export const KardexPage = () => {
         data: { data },
       } = await axiosAPI.get<APIResponse<Product>>(`/products/${id}`);
 
-      setProduct(data);
+      const {
+        data: {
+          data: { stock },
+        },
+      } = await axiosAPI.get<APIResponse<{ stock: number }>>(
+        `/products/stock/${id}`
+      );
+
+      setProduct({ ...data, stock: stock });
     } catch (error) {
       handleErrorMessage(error);
     }
@@ -41,12 +49,14 @@ export const KardexPage = () => {
         <div className="flex items-center gap-4">
           <div className="border rounded-md px-4 py-1">
             <p className="font-medium">
-              Stock de apertura: <span className="font-normal">0</span>
+              Stock de apertura:{" "}
+              <span className="font-normal">{product?.initialStock}</span>
             </p>
           </div>
           <div className="border rounded-md px-4 py-1">
             <p className="font-medium">
-              Stock actual: <span className="font-normal">0</span>
+              Stock actual:{" "}
+              <span className="font-normal">{product?.stock}</span>
             </p>
           </div>
         </div>

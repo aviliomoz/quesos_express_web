@@ -1,29 +1,23 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "../hooks/useForm";
-import { movementSchema } from "../schemas/movement";
 import { FormEvent, useEffect, useState } from "react";
 import { FormInput } from "./ui/FormInput";
 import { axiosAPI } from "../libs/axios";
 import { APIResponse, Movement } from "../types";
 import { handleErrorMessage } from "../utils/errors";
 import toast from "react-hot-toast";
-import { FormStatusSelect } from "./ui/FormStatusSelect";
+import { FormSelect } from "./ui/FormSelect";
 import { FormDateInput } from "./ui/FormDateInput";
-
-const initialFormData = {
-  type: "",
-  date: new Date().toISOString(),
-  description: "",
-  status: "active",
-};
+import { useAuth } from "../contexts/AuthContext";
 
 export const MovementForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, setData, handleChange } = useForm(
-    initialFormData,
-    movementSchema
-  );
+  const { user } = useAuth();
+
+  const [type, setType] = useState<string>("entry");
+  const [date, setDate] = useState<Date>(new Date());
+  const [description, setDescription] = useState<string>("");
+  const [status, setStatus] = useState<string>("active");
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,9 +25,17 @@ export const MovementForm = () => {
     setLoading(true);
 
     try {
-      await axiosAPI.post<APIResponse<Movement>>("/movements", data);
+      await Promise.all([
+        axiosAPI.post<APIResponse<Movement>>("/movements", {
+          type,
+          date,
+          description,
+          status,
+          userId: user?.id,
+        }),
+      ]);
       toast.success("Movimiento creado correctamente");
-      navigate("/movements");
+      navigate(-1);
     } catch (error) {
       return handleErrorMessage(error);
     } finally {
@@ -45,9 +47,17 @@ export const MovementForm = () => {
     setLoading(true);
 
     try {
-      await axiosAPI.put<APIResponse<Movement>>(`/movements/${id}`, data);
+      await Promise.all([
+        axiosAPI.put<APIResponse<Movement>>(`/movements/${id}`, {
+          type,
+          date,
+          description,
+          status,
+          userId: user?.id,
+        }),
+      ]);
       toast.success("Movimiento actualizado correctamente");
-      navigate("/movements");
+      navigate(-1);
     } catch (error) {
       return handleErrorMessage(error);
     } finally {
@@ -70,12 +80,10 @@ export const MovementForm = () => {
       data: { data },
     } = await axiosAPI<APIResponse<Movement>>(`/movements/${id}`);
 
-    setData({
-      type: data.type,
-      date: new Date(data.date).toISOString(),
-      description: data.description,
-      status: data.status,
-    });
+    setType(data.type);
+    setDate(data.date);
+    setDescription(data.description || "");
+    setStatus(data.status);
   };
 
   useEffect(() => {
@@ -84,32 +92,40 @@ export const MovementForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-96">
-      <FormInput
-        change={handleChange}
+      <FormSelect
+        change={(e) => setType(e.target.value)}
         label="Tipo"
         name="type"
-        type="text"
-        value={data.type}
-      />
+        value={type}
+      >
+        <option value={"entry"}>Entrada</option>
+        <option value={"output"}>Salida</option>
+      </FormSelect>
+
       <FormDateInput
-        change={handleChange}
+        change={(e) => setDate(new Date(e.target.value))}
         label="Fecha"
         name="date"
-        value={data.date}
+        value={date}
       />
       <FormInput
-        change={handleChange}
+        change={(e) => setDescription(e.target.value)}
         label="Descripción"
         name="description"
         type="text"
-        value={data.description}
+        value={description}
       />
-      <FormStatusSelect
-        change={handleChange}
-        label="Estado"
-        name="status"
-        value={data.status}
-      />
+      {id && (
+        <FormSelect
+          change={(e) => setStatus(e.target.value)}
+          label="Estado"
+          name="status"
+          value={status}
+        >
+          <option value={"active"}>Activo</option>
+          <option value={"inactive"}>Inactivo</option>
+        </FormSelect>
+      )}
       <button
         className="bg-dark-gradient text-white py-1.5 rounded-md mt-4 text-sm"
         type="submit"

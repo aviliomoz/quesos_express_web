@@ -1,28 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "../hooks/useForm";
-import { productSchema } from "../schemas/product";
 import { FormEvent, useEffect, useState } from "react";
 import { FormInput } from "./ui/FormInput";
 import { axiosAPI } from "../libs/axios";
 import { APIResponse, Product } from "../types";
 import { handleErrorMessage } from "../utils/errors";
 import toast from "react-hot-toast";
-import { FormStatusSelect } from "./ui/FormStatusSelect";
-
-const initialFormData = {
-  name: "",
-  price: 0,
-  initial_stock: 0,
-  status: "active",
-};
+import { FormSelect } from "./ui/FormSelect";
 
 export const ProductForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, setData, handleChange } = useForm(
-    initialFormData,
-    productSchema
-  );
+
+  const [name, setName] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [initialStock, setInitialStock] = useState<number>(0);
+  const [status, setStatus] = useState<string>("active");
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -30,7 +22,12 @@ export const ProductForm = () => {
     setLoading(true);
 
     try {
-      await axiosAPI.post<APIResponse<Product>>("/products", data);
+      await axiosAPI.post<APIResponse<Product>>("/products", {
+        name,
+        price,
+        initialStock,
+        status,
+      });
       toast.success("Producto creado correctamente");
       navigate("/products");
     } catch (error) {
@@ -44,7 +41,12 @@ export const ProductForm = () => {
     setLoading(true);
 
     try {
-      await axiosAPI.put<APIResponse<Product>>(`/products/${id}`, data);
+      await axiosAPI.put<APIResponse<Product>>(`/products/${id}`, {
+        name,
+        price,
+        initialStock,
+        status,
+      });
       toast.success("Producto actualizado correctamente");
       navigate("/products");
     } catch (error) {
@@ -69,12 +71,10 @@ export const ProductForm = () => {
       data: { data },
     } = await axiosAPI<APIResponse<Product>>(`/products/${id}`);
 
-    setData({
-      name: data.name,
-      price: data.price,
-      initial_stock: data.initial_stock,
-      status: data.status,
-    });
+    setName(data.name);
+    setPrice(data.price);
+    setInitialStock(data.initialStock);
+    setStatus(data.status);
   };
 
   useEffect(() => {
@@ -84,32 +84,37 @@ export const ProductForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-96">
       <FormInput
-        change={handleChange}
+        change={(e) => setName(e.target.value)}
         label="Nombre"
         name="name"
         type="text"
-        value={data.name}
+        value={name}
       />
       <FormInput
-        change={handleChange}
+        change={(e) => setPrice(parseFloat(e.target.value))}
         label="Precio"
         name="price"
         type="number"
-        value={data.price}
+        value={price}
       />
       <FormInput
-        change={handleChange}
+        change={(e) => setInitialStock(parseFloat(e.target.value))}
         label="Stock inicial"
         name="initial_stock"
         type="number"
-        value={data.initial_stock}
+        value={initialStock}
       />
-      <FormStatusSelect
-        change={handleChange}
-        label="Estado"
-        name="status"
-        value={data.status}
-      />
+      {id && (
+        <FormSelect
+          change={(e) => setStatus(e.target.value)}
+          label="Estado"
+          name="status"
+          value={status}
+        >
+          <option value={"active"}>Activo</option>
+          <option value={"inactive"}>Inactivo</option>
+        </FormSelect>
+      )}
       <button
         className="bg-dark-gradient text-white py-1.5 rounded-md mt-4 text-sm"
         type="submit"

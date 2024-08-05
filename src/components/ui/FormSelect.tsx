@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent, Children } from "react";
 
 type Props = {
   label: string;
@@ -6,14 +6,16 @@ type Props = {
   value: string;
   name: string;
   disabled?: boolean;
+  children: React.ReactNode;
 };
 
-export function FormStatusSelect({
+export function FormSelect({
   label,
   change,
   value,
   name,
   disabled = false,
+  children,
 }: Props) {
   return (
     <label className="flex flex-col gap-1 mb-1 text-sm ">
@@ -25,8 +27,7 @@ export function FormStatusSelect({
         onChange={change}
         disabled={disabled}
       >
-        <option value="active">Activo</option>
-        <option value="inactive">Inactivo</option>
+        {children}
       </select>
     </label>
   );

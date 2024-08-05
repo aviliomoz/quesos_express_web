@@ -12,6 +12,7 @@ import { TableOptions } from "./ui/TableOptions";
 import { Table } from "./ui/Table";
 import { TableOptionsLink } from "./ui/TableOptionsLink";
 import { ClipboardList, PenBox } from "lucide-react";
+import { ProductStockData } from "./ProductStockData";
 
 export const ProductsTable = () => {
   const [searchParams] = useSearchParams();
@@ -67,7 +68,7 @@ export const ProductsTable = () => {
             <Link to={`/products/${product.id}`}>{product.name}</Link>
           </TableData>
           <TableData>{`S/ ${product.price.toFixed(2)}`}</TableData>
-          <TableData>{`${0}`}</TableData>
+          <ProductStockData id={product.id} />
           <TableBadge status={product.status}>
             {product.status === "active" ? "Activo" : "Inactivo"}
           </TableBadge>
