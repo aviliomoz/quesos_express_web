@@ -1,10 +1,4 @@
-import {
-  BookUser,
-  Box,
-  ShoppingBag,
-  Truck,
-  Wallet,
-} from "lucide-react";
+import { BookUser, Box, ShoppingBag, Truck, Wallet } from "lucide-react";
 import { NavigationPath } from "../types";
 
 export const paths: NavigationPath[] = [

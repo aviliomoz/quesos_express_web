@@ -1,7 +1,7 @@
 import { LogOut } from "lucide-react";
 import { useState } from "react";
 import { axiosAPI } from "../../libs/axios";
-import { AuthResponseType } from "../../types";
+import { APIResponse } from "../../types";
 import { handleErrorMessage } from "../../utils/errors";
 
 export const LogoutButton = () => {
@@ -11,7 +11,7 @@ export const LogoutButton = () => {
     setLoading(true);
 
     try {
-      await axiosAPI.get<AuthResponseType>("/auth/logout");
+      await axiosAPI.get<APIResponse<null>>("/auth/logout");
 
       location.assign("/");
     } catch (error) {

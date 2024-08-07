@@ -5,6 +5,7 @@ import { APIResponse, Product } from "../types";
 import { useEffect, useState } from "react";
 import { handleErrorMessage } from "../utils/errors";
 import { GradientLink } from "../components/ui/GradientLink";
+import { KardexTable } from "../components/KardexTable";
 
 export const KardexPage = () => {
   const { id } = useParams();
@@ -45,7 +46,7 @@ export const KardexPage = () => {
           Volver
         </Link>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <div className="border rounded-md px-4 py-1">
             <p className="font-medium">
@@ -66,6 +67,7 @@ export const KardexPage = () => {
           icon={Plus}
         />
       </div>
+      <KardexTable />
     </>
   );
 };

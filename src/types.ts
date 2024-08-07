@@ -31,7 +31,7 @@ export type Product = {
   price: number;
   initialStock: number;
   status: Status;
-  stock?: number
+  stock?: number;
 };
 
 export type Customer = {
@@ -89,3 +89,19 @@ export type Movement = {
   userId: string;
   status: Status;
 };
+
+export type Kardex = {
+  id: string;
+  date: Date;
+  product: {
+    id: string;
+    name: string;
+    status: string;
+  };
+  type: "entry" | "output" | "sale" | "purchase";
+  description: string;
+  status: string;
+  entry: number;
+  output: number;
+  balance: number;
+}[];
