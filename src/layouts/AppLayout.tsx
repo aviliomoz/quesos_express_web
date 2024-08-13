@@ -6,7 +6,6 @@ import { LogoutButton } from "../components/auth/LogoutButton";
 import { Loading } from "../components/ui/Loading";
 import { UserWidget } from "../components/auth/UserWidget";
 import { PageTitle } from "../components/PageTitle";
-import OrdersCalendar from "../components/OrdersCalendar";
 
 export const AppLayout = () => {
   const { user, validating } = useAuth();
@@ -33,12 +32,9 @@ export const AppLayout = () => {
         <PageTitle />
         <UserWidget />
       </header>
-      <main className="ml-60 mt-16 w-[calc(100%-240px-320px)] p-6">
+      <main className="ml-60 mt-16 w-[calc(100%-240px)] p-6">
         <Outlet />
       </main>
-      <div className="fixed top-16 right-0 w-80 border-l h-[calc(100vh-64px)] p-6">
-        <OrdersCalendar />
-      </div>
     </>
   );
 };

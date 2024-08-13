@@ -1,11 +1,12 @@
-import { ArrowLeft, Plus } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Plus } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { axiosAPI } from "../libs/axios";
 import { APIResponse, Product } from "../types";
 import { useEffect, useState } from "react";
 import { handleErrorMessage } from "../utils/errors";
 import { GradientLink } from "../components/ui/GradientLink";
-import { KardexTable } from "../components/KardexTable";
+import { KardexTable } from "../components/products/KardexTable";
+import { GoBackButton } from "../components/ui/GoBackButton";
 
 export const KardexPage = () => {
   const { id } = useParams();
@@ -41,16 +42,13 @@ export const KardexPage = () => {
         <h3 className="font-semibold">
           Kardex: <span className="font-normal">{product?.name}</span>
         </h3>
-        <Link to={"/products"} className="flex items-center gap-2 text-sm">
-          <ArrowLeft className="w-4" />
-          Volver
-        </Link>
+        <GoBackButton />
       </div>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <div className="border rounded-md px-4 py-1">
             <p className="font-medium">
-              Stock de apertura:{" "}
+              Stock inicial:{" "}
               <span className="font-normal">{product?.initialStock}</span>
             </p>
           </div>
@@ -62,7 +60,7 @@ export const KardexPage = () => {
           </div>
         </div>
         <GradientLink
-          url="/products/movements/new"
+          url={`/products/${id}/movements/new`}
           text="Nuevo movimiento"
           icon={Plus}
         />

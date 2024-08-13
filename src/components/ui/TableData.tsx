@@ -1,16 +1,13 @@
 type Props = {
-  alignment?: "left" | "center" | "right";
+  alignment?: "left" | "center";
   children: string | JSX.Element;
-  indentation?: 0 | 1 | 2 | 3 | 4;
 };
 
-export const TableData = ({
-  children,
-  alignment = "center",
-  indentation = 0,
-}: Props) => {
+export const TableData = ({ children, alignment = "center" }: Props) => {
   return (
-    <td className={`text-${alignment} text-sm pl-${indentation.toString()}`}>
+    <td
+      className={`text-${alignment} text-sm ${alignment === "left" && "pl-4"} truncate max-w-40`}
+    >
       {children}
     </td>
   );

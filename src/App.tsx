@@ -10,6 +10,10 @@ import { SalesPage } from "./pages/SalesPage";
 import { ProductPage } from "./pages/ProductPage";
 import { KardexPage } from "./pages/KardexPage";
 import { MovementPage } from "./pages/MovementPage";
+import { SupplierPage } from "./pages/SupplierPage";
+import { CustomerPage } from "./pages/CustomerPage";
+import { PurchasePage } from "./pages/PurchasePage";
+import { SalePage } from "./pages/SalePage";
 
 function App() {
   return (
@@ -21,21 +25,27 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/products/new" element={<ProductPage />} />
             <Route path="/products/:id" element={<ProductPage />} />
-            <Route path="/products/kardex/:id" element={<KardexPage />} />
-            <Route path="/products/movements/new" element={<MovementPage />} />
-            <Route path="/products/movements/:id" element={<MovementPage />} />
+            <Route path="/products/:id/kardex" element={<KardexPage />} />
+            <Route
+              path="/products/:pid/movements/new"
+              element={<MovementPage />}
+            />
+            <Route
+              path="/products/:pid/movements/:mid"
+              element={<MovementPage />}
+            />
             <Route path="/customers" element={<CustomersPage />} />
-            <Route path="/customers/new" element={<></>} />
-            <Route path="/customers/:id" element={<></>} />
+            <Route path="/customers/new" element={<CustomerPage />} />
+            <Route path="/customers/:id" element={<CustomerPage />} />
             <Route path="/sales" element={<SalesPage />} />
-            <Route path="/sales/new" element={<></>} />
-            <Route path="/sales/:id" element={<></>} />
+            <Route path="/sales/new" element={<SalePage />} />
+            <Route path="/sales/:id" element={<SalePage />} />
             <Route path="/purchases" element={<PurchasesPage />} />
-            <Route path="/purchases/new" element={<></>} />
-            <Route path="/purchases/:id" element={<></>} />
+            <Route path="/purchases/new" element={<PurchasePage />} />
+            <Route path="/purchases/:id" element={<PurchasePage />} />
             <Route path="/suppliers" element={<SuppliersPage />} />
-            <Route path="/suppliers/new" element={<></>} />
-            <Route path="/suppliers/:id" element={<></>} />
+            <Route path="/suppliers/new" element={<SupplierPage />} />
+            <Route path="/suppliers/:id" element={<SupplierPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

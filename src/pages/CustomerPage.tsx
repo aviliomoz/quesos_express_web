@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
-import { MovementForm } from "../components/movements/MovementForm";
 import { GoBackButton } from "../components/ui/GoBackButton";
+import { CustomerForm } from "../components/customers/CustomerForm";
 
-export const MovementPage = () => {
+export const CustomerPage = () => {
   const { id } = useParams();
 
   return (
     <>
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-semibold">
-          {id ? "Detalles del movimiento" : "Crear nuevo movimiento"}
+          {id ? "Detalles del proveedor" : "Crear nuevo proveedor"}
         </h3>
         <GoBackButton />
       </div>
-      <MovementForm />
+      <CustomerForm />
     </>
   );
 };

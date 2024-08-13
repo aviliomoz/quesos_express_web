@@ -1,10 +1,10 @@
 import { format } from "date-fns";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 
 type Props = {
   label: string;
   change: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: Date;
+  value: string;
   name?: string;
   min?: string;
   max?: string;

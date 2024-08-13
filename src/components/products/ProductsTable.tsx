@@ -1,16 +1,16 @@
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { axiosAPI } from "../libs/axios";
-import { APIResponse, Product } from "../types";
-import { handleErrorMessage } from "../utils/errors";
-import { Loading } from "./ui/Loading";
-import { TableRow } from "./ui/TableRow";
-import { TableData } from "./ui/TableData";
-import { TableBadge } from "./ui/TableBadge";
-import { TableOptions } from "./ui/TableOptions";
-import { Table } from "./ui/Table";
-import { TableOptionsLink } from "./ui/TableOptionsLink";
+import { axiosAPI } from "../../libs/axios";
+import { APIResponse, Product } from "../../types";
+import { handleErrorMessage } from "../../utils/errors";
+import { Loading } from "../ui/Loading";
+import { TableRow } from "../ui/TableRow";
+import { TableData } from "../ui/TableData";
+import { TableBadge } from "../ui/TableBadge";
+import { TableOptions } from "../ui/TableOptions";
+import { Table } from "../ui/Table";
+import { TableOptionsLink } from "../ui/TableOptionsLink";
 import { ClipboardList, PenBox } from "lucide-react";
 import { ProductStockData } from "./ProductStockData";
 
@@ -64,7 +64,7 @@ export const ProductsTable = () => {
     >
       {products.map((product) => (
         <TableRow key={product.id}>
-          <TableData alignment="left" indentation={4}>
+          <TableData alignment="left">
             <Link to={`/products/${product.id}`}>{product.name}</Link>
           </TableData>
           <TableData>{`S/ ${product.price.toFixed(2)}`}</TableData>
@@ -78,7 +78,7 @@ export const ProductsTable = () => {
             </TableOptionsLink>
             <TableOptionsLink
               icon={ClipboardList}
-              url={`/products/kardex/${product.id}`}
+              url={`/products/${product.id}/kardex`}
             >
               Ver kardex
             </TableOptionsLink>

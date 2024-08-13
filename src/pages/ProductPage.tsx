@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ProductForm } from "../components/ProductForm";
+import { ProductForm } from "../components/products/ProductForm";
 import { GoBackButton } from "../components/ui/GoBackButton";
 
 export const ProductPage = () => {

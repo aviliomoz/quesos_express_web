@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
-import { FormInput } from "./ui/FormInput";
-import { axiosAPI } from "../libs/axios";
-import { APIResponse, Product } from "../types";
-import { handleErrorMessage } from "../utils/errors";
+import { FormInput } from "../ui/FormInput";
+import { axiosAPI } from "../../libs/axios";
+import { APIResponse, Product } from "../../types";
+import { handleErrorMessage } from "../../utils/errors";
+import { FormSelect } from "../ui/FormSelect";
 import toast from "react-hot-toast";
-import { FormSelect } from "./ui/FormSelect";
 
 export const ProductForm = () => {
   const navigate = useNavigate();

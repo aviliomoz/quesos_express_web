@@ -1,5 +1,5 @@
-import { ProductFilters } from "../components/ProductFilters";
-import { ProductsTable } from "../components/ProductsTable";
+import { ProductFilters } from "../components/products/ProductFilters";
+import { ProductsTable } from "../components/products/ProductsTable";
 import { SearchBar } from "../components/SearchBar";
 import { GradientLink } from "../components/ui/GradientLink";
 import { Plus } from "lucide-react";

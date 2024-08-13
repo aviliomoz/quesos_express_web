@@ -24,6 +24,7 @@ export type APIResponse<T> = {
 };
 
 export type Status = "active" | "inactive";
+export type SaleStatus = "pending" | "deleted" | "completed";
 
 export type Product = {
   id: string;
@@ -36,12 +37,11 @@ export type Product = {
 
 export type Customer = {
   id: string;
-  dni: string;
   name: string;
-  lastname: string;
-  phone?: string;
-  address?: string;
+  phone: string | null;
   status: Status;
+  dni: string;
+  address: string | null;
 };
 
 export type Supplier = {
@@ -49,28 +49,6 @@ export type Supplier = {
   ruc: string;
   name: string;
   phone: string;
-  status: Status;
-};
-
-export type Sale = {
-  id: string;
-  customer_id: string;
-  orderDate: string; // assuming ISO 8601 date string
-  deliveryDate?: string; // assuming ISO 8601 date string
-  paymentDate?: string; // assuming ISO 8601 date string
-  delivered: boolean;
-  paid: boolean;
-  total: number;
-  user_id: string;
-  status: Status;
-};
-
-export type Purchase = {
-  id: string;
-  timestamp: string; // assuming ISO 8601 date string
-  user_id: string;
-  supplier_id: string;
-  total: number;
   status: Status;
 };
 
@@ -84,10 +62,11 @@ export type MovementDetail = {
 export type Movement = {
   id: string;
   type: "entry" | "output";
-  date: Date;
+  date: string;
   description: string;
-  userId: string;
   status: Status;
+  productId: string;
+  amount: number;
 };
 
 export type Kardex = {
@@ -105,3 +84,51 @@ export type Kardex = {
   output: number;
   balance: number;
 }[];
+
+export type Purchase = {
+  status: Status;
+  date: string;
+  id: string;
+  supplier: {
+    id: string;
+    name: string;
+  };
+};
+
+export type PurchaseDetail = {
+  product: {
+    id: string;
+    name: string;
+    status: Status;
+  };
+  amount: number;
+  id: string;
+  price: number;
+  purchaseId: string;
+  discount: number;
+};
+
+export type Sale = {
+  customer: {
+    id: string;
+    name: string;
+  };
+  date: string;
+  delivered: boolean;
+  paid: boolean;
+  status: SaleStatus;
+  id: string;
+};
+
+export type SaleDetail = {
+  product: {
+    id: string;
+    name: string;
+    status: Status;
+  };
+  amount: number;
+  price: number;
+  discount: number;
+  id: string;
+  saleId: string;
+};

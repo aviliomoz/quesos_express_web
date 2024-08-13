@@ -1,6 +1,6 @@
-import { ProductFilters } from "../components/ProductFilters";
+import { ProductFilters } from "../components/products/ProductFilters";
 import { SearchBar } from "../components/SearchBar";
-import { SuppliersTable } from "../components/SuppliersTable";
+import { SuppliersTable } from "../components/suppliers/SuppliersTable";
 import { GradientLink } from "../components/ui/GradientLink";
 import { Plus } from "lucide-react";
 

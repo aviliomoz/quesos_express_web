@@ -1,14 +1,17 @@
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Supplier } from "../types";
-import { handleErrorMessage } from "../utils/errors";
-import { Loading } from "./ui/Loading";
-import { TableRow } from "./ui/TableRow";
-import { TableData } from "./ui/TableData";
-import { TableBadge } from "./ui/TableBadge";
-import { TableOptions } from "./ui/TableOptions";
-import { Table } from "./ui/Table";
+import { APIResponse, Supplier } from "../../types";
+import { handleErrorMessage } from "../../utils/errors";
+import { Loading } from "../ui/Loading";
+import { TableRow } from "../ui/TableRow";
+import { TableData } from "../ui/TableData";
+import { TableBadge } from "../ui/TableBadge";
+import { TableOptions } from "../ui/TableOptions";
+import { Table } from "../ui/Table";
+import { axiosAPI } from "../../libs/axios";
+import { TableOptionsLink } from "../ui/TableOptionsLink";
+import { Edit } from "lucide-react";
 
 export const SuppliersTable = () => {
   const [searchParams] = useSearchParams();
@@ -17,40 +20,16 @@ export const SuppliersTable = () => {
 
   const getSuppliers = async () => {
     setLoading(true);
+    const search = searchParams.get("search") || "";
 
     try {
-      // Datos de ejemplo
-      const exampleSuppliers: Supplier[] = [
-        {
-          id: "1",
-          ruc: "12345678901",
-          name: "Don Queso",
-          phone: "987654321",
-          status: true,
-        },
-        {
-          id: "2",
-          ruc: "10987654321",
-          name: "La granja",
-          phone: "123456789",
-          status: true,
-        },
-        {
-          id: "3",
-          ruc: "10293847561",
-          name: "Cabañita SAC",
-          phone: "567891234",
-          status: false,
-        },
-      ];
-
-      const search = searchParams.get("search") || "";
-
-      setSuppliers(
-        exampleSuppliers.filter((supplier) =>
-          supplier.name.toLowerCase().includes(search.toLowerCase())
-        )
+      const {
+        data: { data },
+      } = await axiosAPI.get<APIResponse<Supplier[]>>(
+        `/suppliers?search=${search}`
       );
+
+      setSuppliers(data);
     } catch (error) {
       toast.error(handleErrorMessage(error));
     } finally {
@@ -77,10 +56,12 @@ export const SuppliersTable = () => {
           <TableData>{supplier.name}</TableData>
           <TableData>{supplier.phone}</TableData>
           <TableBadge status={supplier.status}>
-            {supplier.status ? "Activo" : "Inactivo"}
+            {supplier.status === "active" ? "Activo" : "Inactivo"}
           </TableBadge>
           <TableOptions>
-            <p>Aquí van las opciones</p>
+            <TableOptionsLink url={`/suppliers/${supplier.id}`} icon={Edit}>
+              Editar
+            </TableOptionsLink>
           </TableOptions>
         </TableRow>
       ))}

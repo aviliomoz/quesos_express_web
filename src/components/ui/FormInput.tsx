@@ -9,6 +9,7 @@ type Props = {
   min?: number;
   max?: number;
   disabled?: boolean;
+  children?: React.ReactNode;
 };
 
 export function FormInput({
@@ -20,9 +21,10 @@ export function FormInput({
   min,
   max,
   disabled = false,
+  children,
 }: Props) {
   return (
-    <label className="flex flex-col gap-1 mb-1 text-sm">
+    <label className="flex flex-col gap-1 mb-1 text-sm relative">
       <p className="">{label}:</p>
       <input
         className="border rounded-md px-3 py-1 outline-none w-full text-base"
@@ -35,6 +37,7 @@ export function FormInput({
         disabled={disabled}
         autoComplete="off"
       />
+      {children}
     </label>
   );
 }

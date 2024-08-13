@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { APIResponse, Kardex } from "../types";
+import { APIResponse, Kardex } from "../../types";
 import { useParams } from "react-router-dom";
-import { handleErrorMessage } from "../utils/errors";
-import { axiosAPI } from "../libs/axios";
-import { Loading } from "./ui/Loading";
-import { Table } from "./ui/Table";
-import { TableRow } from "./ui/TableRow";
-import { TableData } from "./ui/TableData";
+import { handleErrorMessage } from "../../utils/errors";
+import { axiosAPI } from "../../libs/axios";
+import { Loading } from "../ui/Loading";
+import { Table } from "../ui/Table";
+import { TableRow } from "../ui/TableRow";
+import { TableData } from "../ui/TableData";
 import { format } from "date-fns";
-import { getOperationName } from "../utils/operations";
+import { getOperationName } from "../../utils/operations";
+import { TableOptions } from "../ui/TableOptions";
+import { TableOptionsLink } from "../ui/TableOptionsLink";
+import { Edit } from "lucide-react";
 
 export const KardexTable = () => {
   const { id } = useParams();
@@ -51,13 +54,18 @@ export const KardexTable = () => {
         "Entrada",
         "Salida",
         "Stock",
+        "Opciones",
       ]}
     >
       {kardex.map((record) => (
         <TableRow key={record.id}>
-          <TableData>{format(record.date, "dd/MM/yyyy")}</TableData>
-          <TableData>{getOperationName(record.type)}</TableData>
-          <TableData>{record.description}</TableData>
+          <TableData alignment="left">
+            {format(record.date, "dd/MM/yyyy")}
+          </TableData>
+          <TableData alignment="left">
+            {getOperationName(record.type)}
+          </TableData>
+          <TableData alignment="left">{record.description}</TableData>
           <TableData>
             {record.entry === 0 ? "-" : record.entry.toString()}
           </TableData>
@@ -65,6 +73,14 @@ export const KardexTable = () => {
             {record.output === 0 ? "-" : record.output.toString()}
           </TableData>
           <TableData>{record.balance.toString()}</TableData>
+          <TableOptions>
+            <TableOptionsLink
+              icon={Edit}
+              url={`/products/${id}/movements/${record.id}`}
+            >
+              Editar
+            </TableOptionsLink>
+          </TableOptions>
         </TableRow>
       ))}
     </Table>

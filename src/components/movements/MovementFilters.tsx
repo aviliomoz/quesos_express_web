@@ -1,7 +1,7 @@
-import { FilterSelect } from "./ui/FilterSelect";
-import { FilterWidget } from "./ui/FilterWidget";
+import { FilterSelect } from "../ui/FilterSelect";
+import { FilterWidget } from "../ui/FilterWidget";
 
-export const ProductFilters = () => {
+export const MovementFilters = () => {
   return (
     <FilterWidget>
       <FilterSelect
